@@ -50,9 +50,9 @@ const imageTool = (fs: FreestyleDevServerFilesystem) =>
 
       const data = await response.arrayBuffer();
 
-      console.log("Writing file to dev server:", filePath);
+      const fileContent = Buffer.from(data).toString("base64");
 
-      await fs.writeFile(filePath, data, "base64");
+      await fs.writeFile(filePath, fileContent, "base64");
 
       console.log("File written to dev server:", filePath);
       return {
