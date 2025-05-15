@@ -1,5 +1,5 @@
 import { SYSTEM_MESSAGE } from "@/lib/system";
-import { anthropic } from "@ai-sdk/anthropic";
+import { deepseek } from "@ai-sdk/deepseek";
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 // import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
@@ -12,10 +12,6 @@ export const memory = new Memory({
     threads: {
       generateTitle: true,
     },
-    // workingMemory: {
-    //   enabled: true,
-    //   use: "tool-call",
-    // },
   },
   vector: new PgVector({
     connectionString: process.env.DATABASE_URL!,
@@ -33,7 +29,7 @@ export const memory = new Memory({
 
 export const builderAgent = new Agent({
   name: "BuilderAgent",
-  model: anthropic("claude-3-7-sonnet-20250219"),
+  model: deepseek("deepseek-chat"),
   instructions: SYSTEM_MESSAGE,
   memory,
 });
