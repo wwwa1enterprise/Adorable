@@ -5,6 +5,7 @@ import { MCPClient } from "@mastra/mcp";
 import { builderAgent } from "@/mastra/agents/builder";
 import { bufferedResponse } from "@/lib/buffered-response";
 import { CoreMessage } from "@mastra/core";
+import imageTool from "@/lib/tools/asset-generation";
 
 export async function POST(req: Request) {
   const appId = getAppIdFromHeaders(req);
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
     return new Response("App not found", { status: 404 });
   }
 
-  const { mcpEphemeralUrl } = await freestyle.requestDevServer({
+  const { mcpEphemeralUrl, fs } = await freestyle.requestDevServer({
     repoId: app.info.gitRepo,
     baseId: app.info.baseId,
   });
@@ -34,6 +35,7 @@ export async function POST(req: Request) {
     },
   });
 
+  const imageGenerationTool = imageTool(fs);
   const toolsets = await mcp.getToolsets();
 
   const stream = await builderAgent.stream(message.content, {
@@ -41,9 +43,12 @@ export async function POST(req: Request) {
     resourceId: appId,
     maxSteps: 100,
     maxRetries: 0,
-    maxTokens: 64000,
+    // maxTokens: 64000,
     // experimental_continueSteps: true,
-    toolsets,
+    toolsets: {
+      ...toolsets,
+      custom: { imageGenerationTool },
+    },
     onError: async (error) => {
       await mcp.disconnect();
       console.error("Error:", error);

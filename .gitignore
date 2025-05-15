@@ -43,3 +43,8 @@ next-env.d.ts
 
 # git repositories
 /git/
+
+# Virtual Environment
+
+.venv
+__pycache__
