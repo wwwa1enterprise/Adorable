@@ -31,7 +31,6 @@ const imageTool = (fs: FreestyleDevServerFilesystem) =>
       const body = {
         prompt: description,
         removeBackground,
-        returnBase64: true,
       };
       const response = await fetch(endpoint, {
         method: "POST",
@@ -53,7 +52,7 @@ const imageTool = (fs: FreestyleDevServerFilesystem) =>
 
       console.log("Writing file to dev server:", filePath);
 
-      await fs.writeFile(filePath, data, "binary");
+      await fs.writeFile(filePath, data, "base64");
 
       console.log("File written to dev server:", filePath);
       return {

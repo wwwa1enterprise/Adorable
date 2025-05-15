@@ -3,7 +3,7 @@ import os
 
 client = InferenceClient(
     provider="replicate",
-    api_key=os.getenv("REPLICATE_API_KEY"),
+    api_key=os.getenv("REPLICATE_API_TOKEN"),
 )
 
 

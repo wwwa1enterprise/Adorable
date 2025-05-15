@@ -3,8 +3,7 @@ from rembg import remove
 import os
 from flask import Flask, request, jsonify, send_file
 import io
-import base64
-from PIL import Image
+
 
 load_dotenv()
 
@@ -42,16 +41,16 @@ def generate_image():
             image = remove(image)
             print("Background removed successfully")
 
+        image.show()
 
-        # Convert PIL image to bytes
-        img_byte_arr = io.BytesIO()
-        image.save(img_byte_arr, format='PNG')
-        img_byte_arr.seek(0)
+        # Convert image to PNG format
+        image = image.convert("RGBA")
+        image_io = io.BytesIO()
+        image.save(image_io, format='PNG')
+        image_io.seek(0)
 
-        print("Image conversion to bytes successful")
-
-
-        return send_file(img_byte_arr, mimetype='image/png')
+        # Return the BytesIO object directly to avoid data corruption
+        return send_file(image_io, mimetype='image/png')
 
     except Exception as e:
         print(f"Error generating image: {e}")
