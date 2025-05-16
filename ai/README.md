@@ -11,6 +11,7 @@ Currently it's using black-forest-labs/FLUX.1-dev, but in the future it could us
 ## Installation
 
 ```bash
+brew install sentencepiece
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
