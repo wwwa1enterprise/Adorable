@@ -15,7 +15,7 @@ def text_to_image(prompt: str):
       # output is a PIL.Image object
       image = client.text_to_image(
           prompt,
-          model="black-forest-labs/FLUX.1-dev",
+          model="prithivMLmods/Retro-Pixel-Flux-LoRA",
       )
       return image
     except Exception as e:

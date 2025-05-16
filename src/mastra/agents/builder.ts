@@ -1,6 +1,6 @@
 import { SYSTEM_MESSAGE } from "@/lib/system";
-// import { deepseek } from "@ai-sdk/deepseek";
-import { replicate } from "@ai-sdk/replicate";
+import { deepseek } from "@ai-sdk/deepseek";
+// import { replicate } from "@ai-sdk/replicate";
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 // import { TokenLimiter, ToolCallFilter } from "@mastra/memory/processors";
@@ -31,7 +31,7 @@ export const memory = new Memory({
 export const builderAgent = new Agent({
   name: "BuilderAgent",
 
-  model: replicate.languageModel("meta/llama-4-maverick-instruct"),
+  model: deepseek("deepseek-chat"),
   // model: anthropic("claude-3-7-sonnet-20250219"),
   instructions: SYSTEM_MESSAGE,
   memory,
