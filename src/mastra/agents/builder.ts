@@ -1,5 +1,7 @@
 import { SYSTEM_MESSAGE } from "@/lib/system";
-import { deepseek } from "@ai-sdk/deepseek";
+// import { deepseek } from "@ai-sdk/deepseek";
+import { fireworks } from "@ai-sdk/fireworks";
+
 // import { replicate } from "@ai-sdk/replicate";
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
@@ -31,7 +33,7 @@ export const memory = new Memory({
 export const builderAgent = new Agent({
   name: "BuilderAgent",
 
-  model: deepseek("deepseek-chat"),
+  model: fireworks("accounts/fireworks/models/llama4-maverick-instruct-basic"),
   // model: anthropic("claude-3-7-sonnet-20250219"),
   instructions: SYSTEM_MESSAGE,
   memory,
