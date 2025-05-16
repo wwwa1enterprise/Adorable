@@ -32,6 +32,7 @@ export const builderAgent = new Agent({
   name: "BuilderAgent",
 
   model: deepseek("deepseek-chat"),
+  // model: fireworks("accounts/fireworks/models/qwen3-235b-a22b"),
   // model: anthropic("claude-3-7-sonnet-20250219"),
   instructions: SYSTEM_MESSAGE,
   memory,

@@ -28,7 +28,9 @@ export const appUsers = pgTable("app_users", {
   userId: text("user_id").notNull(),
   appId: uuid("app_id")
     .notNull()
-    .references(() => appsTable.id),
+    .references(() => appsTable.id, {
+      onDelete: "cascade",
+    }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   permissions: appPermissions("permissions"),
   freestyleIdentity: text("freestyle_identity").notNull(),
@@ -41,14 +43,18 @@ export const messagesTable = pgTable("messages", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   appId: uuid("app_id")
     .notNull()
-    .references(() => appsTable.id),
+    .references(() => appsTable.id, {
+      onDelete: "cascade",
+    }),
   message: json("message").notNull().$type<Message>(),
 });
 
 export const appDeployments = pgTable("app_deployments", {
   appId: uuid("app_id")
     .notNull()
-    .references(() => appsTable.id),
+    .references(() => appsTable.id, {
+      onDelete: "cascade",
+    }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   deploymentUrl: text("deployment_url").notNull().primaryKey(),
   deploymentId: text("deployment_id").notNull(),
@@ -59,7 +65,9 @@ export const appDomains = pgTable("app_domains", {
   id: uuid("id").primaryKey().defaultRandom(),
   appId: uuid("app_id")
     .notNull()
-    .references(() => appsTable.id),
+    .references(() => appsTable.id, {
+      onDelete: "cascade",
+    }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   domain: text("domain").notNull(),
 });
