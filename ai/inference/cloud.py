@@ -8,9 +8,19 @@ client = InferenceClient(
 
 
 def text_to_image(prompt: str):
-  # output is a PIL.Image object
-  image = client.text_to_image(
-      prompt,
-      model="black-forest-labs/FLUX.1-dev",
-  )
-  return image
+  # Retry up to 3 times
+  max_retries = 3
+  for attempt in range(max_retries):
+    try:
+      # output is a PIL.Image object
+      image = client.text_to_image(
+          prompt,
+          model="black-forest-labs/FLUX.1-dev",
+      )
+      return image
+    except Exception as e:
+      if attempt < max_retries - 1:  # Don't print on last attempt
+        print(f"Attempt {attempt + 1} failed: {str(e)}. Retrying...")
+      else:
+        # On last attempt, re-raise the exception
+        raise

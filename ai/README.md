@@ -7,3 +7,17 @@ This is a local inference server for the Adorable App Builder. It currently only
 In NVidia devices this would be swapped with NIM.
 
 Currently it's using black-forest-labs/FLUX.1-dev, but in the future it could use any model.
+
+## Installation
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+## Usage
+
+```bash
+python3 index.py
+```

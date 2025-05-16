@@ -52,7 +52,11 @@ const imageTool = (fs: FreestyleDevServerFilesystem) =>
 
       const fileContent = Buffer.from(data).toString("base64");
 
-      await fs.writeFile(filePath, fileContent, "base64");
+      const filePathTrimmed = filePath.startsWith("template/")
+        ? filePath.replace("template/", "")
+        : filePath;
+
+      await fs.writeFile(filePathTrimmed, fileContent, "base64");
 
       console.log("File written to dev server:", filePath);
       return {
