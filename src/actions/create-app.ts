@@ -23,10 +23,8 @@ export async function createApp({
       source: {
         url:
           {
-            "nextjs-dkjfgdf":
-              "https://github.com/freestyle-sh/freestyle-base-nextjs-shadcn",
-            "vite-skdjfls":
-              "https://github.com/freestyle-sh/freestyle-base-vite-react-typescript-swc",
+            "nextjs-dkjfgdf": "https://github.com/theswerd/retro-game-template",
+            "vite-skdjfls": "https://github.com/theswerd/retro-game-template",
             "expo-lksadfp": "https://github.com/freestyle-sh/freestyle-expo",
           }[baseId] ?? "https://github.com/freestyle-sh/freestyle-next",
         type: "git",
