@@ -9,9 +9,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ExampleButton } from "@/components/ExampleButton";
 import { UserButton } from "@stackframe/stack";
-import { UserApps } from "@/components/user-apps";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PromptInputTextareaWithTypingAnimation } from "@/components/prompt-input";
+import dynamic from "next/dynamic";
+
+const UserApps = dynamic(() => import("@/components/user-apps").then(mod => ({ default: mod.UserApps })), {
+  ssr: false
+});
 
 const queryClient = new QueryClient();
 
