@@ -1,12 +1,22 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getUserApps } from "@/actions/user-apps";
 import { AppCard } from "./app-card";
 
 export function UserApps() {
   const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: ["userApps"],
-    queryFn: getUserApps,
+    queryFn: async () => {
+      const response = await fetch("/api/user-apps");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user apps");
+      }
+      const apps = await response.json();
+      // Convert createdAt string to Date object
+      return apps.map((app: any) => ({
+        ...app,
+        createdAt: new Date(app.createdAt),
+      }));
+    },
     initialData: [],
   });
 
