@@ -16,7 +16,7 @@ import { ExampleButton } from "@/components/ExampleButton";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import { UserButton } from "@stackframe/stack";
 import { ModeToggle } from "@/components/theme-provider";
-import { UserApps } from "@/components/user-apps";
+import { UserAppsServerWrapper } from "@/components/user-apps-server-wrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -198,7 +198,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t py-8 -mx-4">
-            <UserApps />
+            <UserAppsServerWrapper />
           </div>
         </main>
       </QueryClientProvider>

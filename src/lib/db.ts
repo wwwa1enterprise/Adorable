@@ -1,7 +1,8 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import { appendResponseMessages, Message } from "ai";
+import { Message } from "ai";
 import { messagesTable } from "@/db/schema";
 import { sql } from "drizzle-orm";
+import { appendResponseMessages } from "./message-conversion";
 
 export const db = drizzle(process.env.DATABASE_URL!);
 
@@ -38,9 +39,7 @@ export async function saveResponseMessages({
 }: {
   appId: string;
   messages: Message[];
-  responseMessages: Parameters<
-    typeof appendResponseMessages
-  >[0]["responseMessages"];
+  responseMessages: any[];
 }) {
   const newMsgs = appendResponseMessages({
     messages,

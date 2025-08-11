@@ -28,7 +28,20 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-export function UserApps() {
+interface UserApp {
+  id: string;
+  name: string;
+  description: string;
+  gitRepo: string;
+  createdAt: Date;
+  permissions: string | null;
+}
+
+interface UserAppsProps {
+  initialData?: UserApp[];
+}
+
+export function UserApps({ initialData = [] }: UserAppsProps) {
   const queryClient = useQueryClient();
   const [appToDelete, setAppToDelete] = useState<string | null>(null);
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
@@ -36,7 +49,7 @@ export function UserApps() {
   const { data } = useQuery({
     queryKey: ["userApps"],
     queryFn: getUserApps,
-    initialData: [],
+    initialData,
   });
 
   const deleteAppMutation = useMutation({
